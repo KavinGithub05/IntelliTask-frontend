@@ -1,0 +1,108 @@
+<div class="bg-white rounded-2xl p-8 shadow-sm">
+  <h2 class="text-2xl font-semibold mb-6 text-gray-900">
+    {{ taskToEdit ? '✏️ Edit Task' : '➕ Add New Task' }}
+  </h2>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="space-y-5">
+    <!-- Title Field -->
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-2">Task Title *</label>
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="e.g., Complete quarterly report"
+        (ngModelChange)="triggerAISuggestion()"
+        class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+      />
+      <span *ngIf="taskForm.get('title')?.hasError('required') && taskForm.get('title')?.touched" class="text-xs text-red-600 mt-1 block">
+        Task title is required
+      </span>
+    </div>
+
+    <!-- Description Field -->
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-2">Description</label>
+      <textarea
+        formControlName="description"
+        placeholder="Add more details about this task..."
+        (ngModelChange)="triggerAISuggestion()"
+        rows="3"
+        class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all resize-none"
+      ></textarea>
+    </div>
+
+    <!-- Due Date Field -->
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-2">Due Date</label>
+      <input
+        type="date"
+        formControlName="dueDate"
+        class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+      />
+    </div>
+
+    <!-- Priority & AI Suggestion -->
+    <div class="border border-yellow-200 rounded-lg p-4 bg-yellow-50">
+      <div class="flex items-center justify-between mb-3">
+        <label class="text-sm font-medium text-gray-700">Priority *</label>
+        <div class="flex items-center gap-2">
+          <span *ngIf="aiLoading" class="text-xs text-yellow-700 flex items-center gap-1">
+            <span class="animate-spin">⏳</span> Analyzing...
+          </span>
+          <span *ngIf="aiSuggestion && !aiLoading" class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full">
+            💡 AI: {{ aiSuggestion }}
+          </span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <select
+          formControlName="priority"
+          class="col-span-2 md:col-span-1 rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+        >
+          <option value="">Select Priority</option>
+          <option value="low">🟢 Low</option>
+          <option value="medium">🟡 Medium</option>
+          <option value="high">🔴 High</option>
+        </select>
+
+        <button
+          *ngIf="aiSuggestion && !aiLoading"
+          type="button"
+          (click)="applyAISuggestion()"
+          class="col-span-2 md:col-span-1 rounded-lg border border-yellow-300 bg-yellow-100 text-yellow-800 font-medium px-3 py-2 hover:bg-yellow-200 transition-colors text-sm"
+        >
+          ✨ Apply
+        </button>
+      </div>
+
+      <span *ngIf="taskForm.get('priority')?.hasError('required') && taskForm.get('priority')?.touched" class="text-xs text-red-600 mt-2 block">
+        Priority is required
+      </span>
+    </div>
+
+    <!-- Status Field -->
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-2">Status</label>
+      <select
+        formControlName="status"
+        class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+      >
+        <option value="to-do">📋 To-Do</option>
+        <option value="in-progress">⚡ In Progress</option>
+        <option value="completed">✅ Completed</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex gap-3 pt-4">
+      <button
+        type="submit"
+        [disabled]="taskForm.invalid"
+        class="flex-1 py-3 rounded-full bg-yellow-300 font-medium text-gray-900 hover:bg-yellow-400 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 transition-colors"
+      >
+        {{ taskToEdit ? '✅ Update Task' : '➕ Create Task' }}
+      </button>
+    </div>
+  </form>
+</div>

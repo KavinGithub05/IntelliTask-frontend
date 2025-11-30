@@ -1,0 +1,89 @@
+<div class="space-y-6">
+  <h2 class="text-3xl font-bold text-gray-900 mb-8">📊 Dashboard</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Total Tasks KPI Card -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-all">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-600 text-sm font-medium">Total Tasks</p>
+          <p class="text-4xl font-bold text-gray-900 mt-2">{{ total }}</p>
+        </div>
+        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-3xl">
+          📋
+        </div>
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+        All tasks in your system
+      </div>
+    </div>
+
+    <!-- In Progress KPI Card -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-all">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-600 text-sm font-medium">In Progress</p>
+          <p class="text-4xl font-bold text-orange-600 mt-2">{{ inProgress }}</p>
+        </div>
+        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-3xl">
+          ⚡
+        </div>
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+        Tasks currently being worked on
+      </div>
+    </div>
+
+    <!-- Completed KPI Card -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-all">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-600 text-sm font-medium">Completed</p>
+          <p class="text-4xl font-bold text-green-600 mt-2">{{ completed }}</p>
+        </div>
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl">
+          ✅
+        </div>
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+        Tasks successfully completed
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">📈 Completion Rate</h3>
+    <div class="flex items-center gap-4">
+      <div class="flex-1">
+        <div class="w-full bg-gray-200 rounded-full h-3">
+          <div
+            class="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-500"
+            [style.width.%]="total > 0 ? (completed / total) * 100 : 0"
+          ></div>
+        </div>
+      </div>
+      <span class="text-sm font-semibold text-gray-700 whitespace-nowrap">
+        {{ total > 0 ? ((completed / total) * 100 | number : '0.0-0') : 0 }}%
+      </span>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl shadow-sm p-6 border border-yellow-200">
+    <h3 class="text-lg font-semibold text-gray-900 mb-3">💡 Quick Stats</h3>
+    <div class="grid grid-cols-2 gap-4 text-sm">
+      <div>
+        <p class="text-gray-600">To-Do Tasks</p>
+        <p class="text-2xl font-bold text-yellow-700 mt-1">{{ total - completed - inProgress }}</p>
+      </div>
+      <div>
+        <p class="text-gray-600">Completion Ratio</p>
+        <p class="text-2xl font-bold text-yellow-700 mt-1">{{ total > 0 ? completed : 0 }}/{{ total }}</p>
+      </div>
+    </div>
+  </div>
+</div>

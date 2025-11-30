@@ -1,0 +1,106 @@
+<!-- IntelliTask Dashboard Layout with Tailwind CSS -->
+<div class="min-h-screen flex bg-custom-bg">
+  <!-- Sidebar (hidden on mobile & auth routes) -->
+  <aside
+    *ngIf="showSidebar"
+    class="w-72 bg-white rounded-r-3xl shadow-sm p-6 hidden md:flex flex-col gap-6 fixed md:relative h-screen overflow-y-auto"
+    [class.hidden]="!sidebarOpen"
+  >
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-yellow-300 flex items-center justify-center font-bold text-gray-900">
+        IT
+      </div>
+      <div class="text-2xl font-semibold text-gray-900">{{ title }}</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1">
+      <ul class="space-y-4">
+        <li
+          routerLink="/dashboard"
+          routerLinkActive="bg-yellow-50 font-medium"
+          class="flex items-center gap-3 p-3 rounded-lg text-gray-600 cursor-pointer hover:bg-yellow-50 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7h18M3 12h18M3 17h18" />
+          </svg>
+          Dashboard
+        </li>
+        <li
+          routerLink=""
+          routerLinkActive="bg-yellow-50 font-medium"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="flex items-center gap-3 p-3 rounded-lg text-gray-600 cursor-pointer hover:bg-yellow-50 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4" />
+          </svg>
+          My Tasks
+        </li>
+      </ul>
+    </nav>
+
+    <!-- User Menu -->
+    <div class="mt-auto text-sm text-gray-600 space-y-2 border-t pt-4">
+      <div class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-50 cursor-pointer transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5A2.25 2.25 0 008.25 22.5h7.5A2.25 2.25 0 0018 20.25V3.75A2.25 2.25 0 0015.75 1.5h-2.25" />
+        </svg>
+        Settings
+      </div>
+      <div
+        (click)="logout()"
+        class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-50 cursor-pointer transition-colors text-red-600"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        Log out
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 md:p-10 w-full overflow-y-auto">
+    <!-- Top Bar (hidden on auth routes) -->
+    <div *ngIf="showSidebar" class="flex items-center justify-between gap-4 mb-6">
+      <!-- Mobile menu toggle -->
+      <button (click)="toggleSidebar()" class="md:hidden p-2 rounded-lg bg-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <div class="flex items-center gap-4 w-full">
+        <input
+          type="search"
+          placeholder="Search tasks..."
+          class="flex-1 bg-white rounded-full py-3 px-6 shadow-sm placeholder:text-gray-500 placeholder:font-medium focus:outline-none focus:ring-2 focus:ring-yellow-200"
+        />
+        <button (click)="toggleSidebar()" class="md:hidden p-3 rounded-full bg-white shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="hidden md:flex items-center gap-4">
+        <button class="p-3 rounded-full bg-white shadow-sm hover:shadow-md transition-shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+        </button>
+        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-lg">🙂</div>
+      </div>
+    </div>
+
+    <!-- Router Outlet (for dashboard, home, etc.) -->
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,108 @@
+<div class="min-h-screen flex items-center justify-center bg-custom-bg">
+  <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+    <!-- Left: Branding -->
+    <div class="hidden md:flex flex-col justify-center gap-6 bg-white rounded-2xl p-8 shadow-sm">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-yellow-300 flex items-center justify-center font-bold text-gray-900">IT</div>
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-900">IntelliTask</h1>
+          <p class="text-sm text-gray-500">Manage tasks, track time and collaborate with your team.</p>
+        </div>
+      </div>
+
+      <div class="flex-1 flex items-center justify-center">
+        <div class="w-full h-56 rounded-xl bg-gradient-to-br from-yellow-50 to-white border border-yellow-100 flex items-center justify-center text-yellow-700 font-medium">
+          Join IntelliTask
+        </div>
+      </div>
+
+      <div class="text-sm text-gray-500">
+        Already have an account?
+        <a routerLink="/login" class="text-yellow-600 font-medium hover:text-yellow-700">Sign in</a>
+      </div>
+    </div>
+
+    <!-- Right: Register Box -->
+    <div class="bg-white rounded-2xl p-8 shadow-sm flex flex-col justify-center">
+      <h2 class="text-2xl font-semibold mb-2 text-gray-900">Create your account</h2>
+      <p class="text-sm text-gray-500 mb-6">Join IntelliTask and start managing tasks intelligently</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+        <div>
+          <label class="text-sm font-medium text-gray-700">Full Name</label>
+          <input
+            type="text"
+            formControlName="username"
+            placeholder="John Doe"
+            class="mt-2 w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+          />
+          <span *ngIf="form.get('username')?.hasError('required') && form.get('username')?.touched" class="text-xs text-red-600">
+            Full name is required
+          </span>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-gray-700">Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            class="mt-2 w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+          />
+          <span *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched" class="text-xs text-red-600">
+            Please enter a valid email
+          </span>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-gray-700">Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Create a strong password"
+            class="mt-2 w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+          />
+          <span *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched" class="text-xs text-red-600">
+            Password must be at least 8 characters
+          </span>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-gray-700">Confirm Password</label>
+          <input
+            type="password"
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            class="mt-2 w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-yellow-200 transition-all"
+          />
+          <span *ngIf="form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.touched" class="text-xs text-red-600">
+            Please confirm your password
+          </span>
+          <span *ngIf="form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched" class="text-xs text-red-600">
+            Passwords do not match
+          </span>
+        </div>
+
+        <div class="text-xs text-gray-500 flex items-start gap-2 pt-2">
+          <input type="checkbox" class="w-4 h-4 rounded border-gray-300 mt-0.5" required />
+          <span>By creating an account, you agree to our <a href="#" class="text-yellow-600 hover:text-yellow-700">Terms of Service</a> and <a href="#" class="text-yellow-600 hover:text-yellow-700">Privacy Policy</a></span>
+        </div>
+
+        <div class="pt-4">
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            class="w-full py-3 rounded-full bg-yellow-300 font-medium text-gray-900 hover:bg-yellow-400 disabled:bg-gray-200 disabled:cursor-not-allowed transition-colors"
+          >
+            Create Account
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-6 text-center text-sm text-gray-500 md:hidden">
+        Already have an account?
+        <a routerLink="/login" class="text-yellow-600 font-medium hover:text-yellow-700">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>

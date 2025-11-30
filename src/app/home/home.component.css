@@ -1,0 +1,43 @@
+.task-management-app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-main {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.task-form-section {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.task-list-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.section-title {
+  margin-top: 0;
+  color: #333;
+  font-size: 20px;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .task-form-section,
+  .task-list-section {
+    max-width: 100%;
+  }
+}
