@@ -1,6 +1,28 @@
-# IntelliTask Frontend
+# 🎯 IntelliTask Frontend
 
-An Angular 17 application with Tailwind CSS styling for task management with AI-powered features.
+[![Angular](https://img.shields.io/badge/Angular-17-red.svg)](https://angular.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue.svg)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC.svg)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000.svg)](https://vercel.com)
+
+> 🚀 **Live Demo**: [https://intelli-task-frontend.vercel.app](https://intelli-task-frontend.vercel.app)
+
+A modern Angular 17 application with Tailwind CSS styling for intelligent task management with AI-powered priority suggestions.
+
+## 📋 Table of Contents
+
+- [🚀 Features](#-features)
+- [📁 Project Structure](#-project-structure)
+- [🛠️ Setup Instructions](#️-setup-instructions)
+- [🎨 Styling & Theme](#-styling--theme)
+- [🔧 Key Components](#-key-components)
+- [🌐 API Integration](#-api-integration)
+- [📱 Responsive Design](#-responsive-design)
+- [🔒 Security Features](#-security-features)
+- [🧪 Testing](#-testing)
+- [🚀 Deployment](#-deployment)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ## 🚀 Features
 
